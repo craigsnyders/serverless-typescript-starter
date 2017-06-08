@@ -7,14 +7,16 @@ To install it (assuming you have serverless configured with AWS):
 `yarn install`
 
 ### For local development:
+> Note: add your database connection details to hello.ts before runing the example
 
-`yarn run dev`
+`yarn build` - compile the project into the `dist` folder.
+`yarn dev` - compile the project then use [serverless-offline](https://github.com/dherault/serverless-offline) to emulate the nodejs lambda execution environment so we can make HTTP requests locally.
 
 Your lambda should be avaliable on `http://localhost:3000` - and example function: `http://localhost:3000/hello`
 
 ### For deployment:
 
-`yarn run deploy`
+`yarn deploy`
 
 
 TODO (PR's are welcome!):

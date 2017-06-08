@@ -1,13 +1,23 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs"
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [
+      "es6"
+    ],
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "include": [
-      "src/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
-      "node_modules",
-      "**/*.spec.ts"
+    "dist",
+    "**/*.spec.ts"
   ]
 }

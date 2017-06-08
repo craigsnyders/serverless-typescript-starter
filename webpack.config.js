@@ -1,39 +1,39 @@
-var path = require('path');
+const path = require('path');
 
-module.exports = {
-  entry: './src/handler.ts',
-  output: {
-    libraryTarget: 'commonjs',
-    path: path.join(__dirname, 'dist'),
-    filename: 'handler.js',
-  },
-  target: 'node',
-  module: {
-    loaders: [{ test: /\.ts(x?)$/, loader: 'ts-loader' }],
-  },
-  resolve: {
-    extensions: ['.ts', '.js', '.tsx', '.jsx', ''],
-  },
+const root = (dir) => {
+  return path.resolve(__dirname, dir);
 };
 
-// When webpack 2 will be supported with serverless-webpack, it'll look like:
-
-// module.exports = {
-//   entry: './src/handler.ts',
-//   output: {
-//     filename: 'handler.js',
-//     path: path.join(__dirname, 'dist'),
-//   },
-//   module: {
-//     rules: [
-//       {
-//         test: /\.tsx?$/,
-//         loader: 'ts-loader',
-//         exclude: /node_modules/,
-//       },
-//     ],
-//   },
-//   resolve: {
-//     extensions: ['.tsx', '.ts', '.js'],
-//   },
-// };
+module.exports = (options) => {
+  return {
+    entry: {
+      'main': './src/handler.ts'
+    },
+    resolve: {
+      extensions: ['.ts', '.js'],
+      modules: [root('node_modules'), root('src')]
+    },
+    target: 'node',
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          use: [
+            {
+              loader: 'awesome-typescript-loader',
+              options: {
+                useCache: false
+              }
+            }
+          ],
+          exclude: [/\.(spec|e2e)\.ts$/]
+        }
+      ]
+    },
+    output: {
+      path: root('dist'),
+      filename: 'handler.js',
+      libraryTarget: 'commonjs'
+    }
+  };
+};
